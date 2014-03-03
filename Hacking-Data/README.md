@@ -6,7 +6,7 @@ hackJMA.dat <- function(url){
   # Read the lines of the url
   raw.dat <- readLines(url)
   
-  # Match the all entries of rows with starting characters 66666
+  # Match all entries of rows with starting characters 66666
   storm.hdr <- grep("^66666", raw.dat)
   
   # Define the column headers
@@ -17,8 +17,8 @@ hackJMA.dat <- function(url){
   # Clean the raw data by removing the storm header names
   new.dat <- read.table(text = raw.dat[-storm.hdr], col.names = colmn.hdr, comment.char = '', fill = TRUE)
   
-  # Take distance between rows of storm header names, these distance
-  # will be used for labels repitions of the storm
+  # Take the distance between rows of storm header names, these distances
+  # will be used for repetitions of the storm labels
   storm.hdist <- c(diff(storm.hdr) - 1, length(raw.dat) - storm.hdr[length(storm.hdr)])
   
   # Tabulate the storm names
