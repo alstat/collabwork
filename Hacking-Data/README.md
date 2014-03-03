@@ -1,6 +1,6 @@
 the Function
 ====================
-The `hackJMA.dat` function below will import data from the JMA Best Track database, with argument `url` -- a character string of the link. Of course, make sure you have the internet connection,
+The `hackJMA.dat` function below imports data from the JMA Best Track database. The argument `url` is a character string of the data link. Of course, internet connection is required
 ```{coffee}
 hackJMA.dat <- function(url){
   # Read the lines of the url
