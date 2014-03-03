@@ -50,4 +50,28 @@ head(tydf2013)
 4 13010118         2   2   53 1350 1006   0  NA  NA  NA  NA      SONAMU
 5 13010200         2   2   61 1326 1006   0  NA  NA  NA  NA      SONAMU
 6 13010206         2   2   67 1304 1004   0  NA  NA  NA  NA      SONAMU
+
+# Check the last five entries of the data
+tail(tydf2013)
+
+#OUTPUT
+    yymmddhh indicator cat latt lont  hPa kts L50 S50   L30 S30 l1hr  name
+939 13111400         2   2  122 1152 1004   0  NA  NA    NA  NA      PODUL
+940 13111406         2   2  119 1129 1004   0  NA  NA    NA  NA      PODUL
+941 13111412         2   3  119 1117 1002  35   0   0 70120  90      PODUL
+942 13111418         2   3  118 1104 1002  35   0   0 70120  90      PODUL
+943 13111500         2   2  115 1084 1006   0  NA  NA    NA  NA      PODUL
+944 13111506         2   2  111 1071 1006   0  NA  NA    NA  NA      PODUL
 ```
+You can do this for other year as well. 
+
+For plotting purposes, we can extract storm names. For example we can extract the data for Super Typhoon Haiyan (Yolanda) only,
+```{coffee}
+category <- c("TD", "TS", "STS", "TY", "L")
+tydat <- subset(tydf2013, tydf2013$name == "HAIYAN")
+tydat$CLongitude <- tydat$lont*0.1
+tydat$CLatitude <- tydat$latt*0.1
+tydat$Category <- category[tydat$cat]
+tydat$MaxSpeed <- tydat$kts
+```
+Then, we can use the ggplot codes [here](https://github.com/alstat/Analysis-with-Programming/blob/master/2013/R/R-Mapping-Super-Typhoon-Yolanda-Haiyan-Track/Yolanda.R) by ignoring the lines 7 to 20 only.
