@@ -39,7 +39,7 @@ Let us import the 2013 data,
 ```{coffee}
 tydf2013 <- hackJMA.dat(url = "http://www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/Besttracks/bst2013.txt")
 
-# Check the first five entries of the data
+# Check the first six entries of the data
 head(tydf2013)
 
 # OUTPUT
@@ -51,7 +51,7 @@ head(tydf2013)
 5 13010200         2   2   61 1326 1006   0  NA  NA  NA  NA      SONAMU
 6 13010206         2   2   67 1304 1004   0  NA  NA  NA  NA      SONAMU
 
-# Check the last five entries of the data
+# Check the last six entries of the data
 tail(tydf2013)
 
 # OUTPUT
