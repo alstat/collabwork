@@ -75,7 +75,7 @@ tydat$Category <- category[tydat$cat]
 tydat$MaxSpeed <- tydat$kts
 
 # First 10 of the YOLANDA data
-tydat[1:10,]
+tydat[1:10, ]
 
 # OUTPUT
     yymmddhh indicator cat latt lont  hPa kts   L50 S50   L30 S30 l1hr   name CLongitude CLatitude Category MaxSpeed
