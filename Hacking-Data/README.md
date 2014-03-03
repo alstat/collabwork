@@ -90,4 +90,4 @@ tydat[1:10, ]
 904 13110506         2   4   65 1446  980  60 90040  40 90120 120      HAIYAN      144.6       6.5       TY       60
 905 13110512         2   5   69 1429  975  65 90050  50 90150 150      HAIYAN      142.9       6.9        L       65
 ```
-Then, we can use the ggplot codes [here](https://github.com/alstat/Analysis-with-Programming/blob/master/2013/R/R-Mapping-Super-Typhoon-Yolanda-Haiyan-Track/Yolanda.R) by ignoring the lines 7 to 20 only.
+Then, we can use the ggplot codes [here](https://github.com/alstat/Analysis-with-Programming/blob/master/2013/R/R-Mapping-Super-Typhoon-Yolanda-Haiyan-Track/Yolanda.R) by ignoring lines 7 to 20 only.
