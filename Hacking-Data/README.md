@@ -24,7 +24,7 @@ hackJMA.dat <- function(url){
   # Tabulate the storm names
   storms <- read.table(text = raw.dat[storm.hdr], 
                        col.names = c('indicator', 'interId', 'nRecs', 'tropCycNum',
-                                     'interId2', 'dissExit', 'dHrs', 'name', 'revDate'))
+                                     'interId2', 'dissExit', 'dHrs', 'name', 'revDate'), fill = TRUE)
   
   # Add columns for the storm names and its ID numbers
   new.dat$name <- rep(storms$name, times = storm.hdist)
