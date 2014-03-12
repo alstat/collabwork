@@ -93,10 +93,9 @@ tydat[1:10, ]
 Then, we can use the ggplot codes [here](https://github.com/alstat/Analysis-with-Programming/blob/master/2013/R/R-Mapping-Super-Typhoon-Yolanda-Haiyan-Track/Yolanda.R) by ignoring lines 7 to 20 only.
 
 
-Years divisible with 100
+Years end in 00 and 0N
 ====================================
-For data with Year entry in `yymmddhh` divisible with 100 (e.g. 1900 and 2000). We use the special function below,
-
+For data with Year entry in `yymmddhh` divisible with 100 (e.g. 1900 and 2000), or ends with 0N, where N = 1, 2, ..., 12. The special function below is used for remedy,
 ```{coffee}
 format.date <- function(dat){
   dat[, 1] <- as.character(dat[, 1])
@@ -132,7 +131,7 @@ head(tydf20.09)
 5    50518         2   2  107 1337 1002   0  NA  NA  NA  NA      DAMREY
 6    50600         2   2  111 1330 1000   0  NA  NA  NA  NA      DAMREY
 ```
-Notice R excludes zeros in `yymmddhh`, that is 50418 should be 00050418. To remedy this, we need to tell R to treat 50418 as character not as numeric, then supply the missing zeros to it. That's what `format.date` function above does,
+Notice R excludes zeros in `yymmddhh`, that is 50418 should be 00050418. To get rid of this, we need to tell R to treat 50418 as character not as numeric, then supply the missing zeros to it. That's what `format.date` function above does,
 ```{coffee}
 newtydf20.09 <- format.date(dat = tydf20.09)
 head(newtydf20.09)
@@ -146,4 +145,4 @@ head(newtydf20.09)
 5 00050518         2   2  107 1337 1002   0  NA  NA  NA  NA      DAMREY
 6 00050600         2   2  111 1330 1000   0  NA  NA  NA  NA      DAMREY
 ```
-This also works for entries like 00110600 (November 6, 2000) and 01110600 (November 6, 2001).
+The function also works on entries like 00110600 (November 6, 2000) and 01110600 (November 6, 2001); any date that starts with zero.
