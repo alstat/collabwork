@@ -91,3 +91,59 @@ tydat[1:10, ]
 905 13110512         2   5   69 1429  975  65 90050  50 90150 150      HAIYAN      142.9       6.9        L       65
 ```
 Then, we can use the ggplot codes [here](https://github.com/alstat/Analysis-with-Programming/blob/master/2013/R/R-Mapping-Super-Typhoon-Yolanda-Haiyan-Track/Yolanda.R) by ignoring lines 7 to 20 only.
+
+
+Years divisible with 100
+====================================
+For data with Year entry in `yymmddhh` divisible with 100 (e.g. 1900 and 2000). We use the special function below,
+
+```{coffee}
+format.date <- function(dat){
+  dat[, 1] <- as.character(dat[, 1])
+  for(i in 1:nrow(dat)){
+    if((nchar(dat[i, 1]) < nchar('yymmddhh')) &&
+         ((nchar('yymmddhh') - nchar(dat[i, 1])) == 3)){
+      dat[i, 1] <- paste('000', dat[i, 1], sep = '')
+    }
+    if((nchar(dat[i, 1]) < nchar('yymmddhh')) &&
+         ((nchar('yymmddhh') - nchar(dat[i, 1])) == 2)){
+      dat[i, 1] <- paste('00', dat[i, 1], sep = '')
+    }
+    if((nchar(dat[i, 1]) < nchar('yymmddhh')) &&
+         ((nchar('yymmddhh') - nchar(dat[i, 1])) == 1)){
+      dat[i, 1] <- paste('0', dat[i, 1], sep = '')
+    }
+  }
+  return(dat)
+}
+```
+So for example, the Best Track for the years [2000 - 2009](http://www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/Besttracks/bst0009.txt), we have
+
+```{coffee}
+tydf20.09 <- hackJMA.dat(url = "http://www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/Besttracks/bst0009.txt")
+head(tydf20.09)
+
+# OUTPUT
+  yymmddhh indicator cat latt lont  hPa kts L50 S50 L30 S30 l1hr   name
+1    50418         2   2   88 1375 1004   0  NA  NA  NA  NA      DAMREY
+2    50500         2   2   97 1360 1004   0  NA  NA  NA  NA      DAMREY
+3    50506         2   2   99 1350 1004   0  NA  NA  NA  NA      DAMREY
+4    50512         2   2  102 1344 1004   0  NA  NA  NA  NA      DAMREY
+5    50518         2   2  107 1337 1002   0  NA  NA  NA  NA      DAMREY
+6    50600         2   2  111 1330 1000   0  NA  NA  NA  NA      DAMREY
+```
+Notice R excludes zeros in `yymmddhh`, that is 50418 should be 00050418. To remedy this, we need to tell R to treat 50418 as character not as numeric, then supply the missing zeros to it. That's what `format.date` function above does,
+```{coffee}
+newtydf20.09 <- format.date(dat = tydf20.09)
+head(newtydf20.09)
+
+# OUTPUT
+  yymmddhh indicator cat latt lont  hPa kts L50 S50 L30 S30 l1hr   name
+1 00050418         2   2   88 1375 1004   0  NA  NA  NA  NA      DAMREY
+2 00050500         2   2   97 1360 1004   0  NA  NA  NA  NA      DAMREY
+3 00050506         2   2   99 1350 1004   0  NA  NA  NA  NA      DAMREY
+4 00050512         2   2  102 1344 1004   0  NA  NA  NA  NA      DAMREY
+5 00050518         2   2  107 1337 1002   0  NA  NA  NA  NA      DAMREY
+6 00050600         2   2  111 1330 1000   0  NA  NA  NA  NA      DAMREY
+```
+This also works for entries like 00110600 (November 6, 2000) and 01110600 (November 6, 2001).
